@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SQLite.Views.DetailsView"
+             Title="{ex:Translate Key=DETAILS_TITLE}"
+             xmlns:b="clr-namespace:Xamarin.Forms.ToolKit.Behaviors;assembly=Xamarin.Forms.ToolKit.Behaviors"            
+             xmlns:ex="clr-namespace:Xamarin.Forms.ToolKit.Extensions;assembly=Xamarin.Forms.ToolKit.Extensions"
+             xmlns:controls="clr-namespace:Xamarin.Forms.ToolKit.Controls;assembly=Xamarin.Forms.ToolKit.Controls"
+             BindingContext="{Binding Details, Source={StaticResource Locator}}">
+
+    <ContentPage.ToolbarItems>
+
+        <controls:HideableToolbarItem Priority="1"
+                                      Order="Secondary" 
+                                      Text="{ex:Translate Key=TXT_DELETE}" 
+                                      Command="{Binding Path=DeleteCommand}"
+                                      IsVisible="{Binding Path=IsDeleteVisible, Mode=TwoWay}" />
+    </ContentPage.ToolbarItems>
+
+    <ContentView ControlTemplate="{StaticResource MyAppTemplate}"
+                 BackgroundColor="White">
+
+        <StackLayout Margin="12,0,12,0">
+
+            <Label Text="{ex:Translate Key=TXT_NAME}"/>
+            <Entry Text="{Binding CurrentTodoItem.Name, Mode=TwoWay}"/>
+
+            <Label Text="{ex:Translate Key=TXT_NOTES}"/>
+            <Entry Text="{Binding CurrentTodoItem.Notes, Mode=TwoWay}"/>
+
+            <Button Text="{ex:Translate Key=TXT_SAVE}"                 
+                    Command="{Binding Path=SaveCommand}"               
+                    Style="{StaticResource BtnGray}"/>
+
+            <Button Text="{ex:Translate Key=TXT_DELETE}"                 
+                    Command="{Binding Path=DeleteCommand}"               
+                    Style="{StaticResource BtnPink}"
+                    IsVisible="{Binding Path=IsDeleteVisible, Mode=TwoWay}"/>
+
+        </StackLayout>
+
+    </ContentView>
+
+</ContentPage>

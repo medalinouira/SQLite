@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:b="clr-namespace:Xamarin.Forms.ToolKit.Behaviors;assembly=Xamarin.Forms.ToolKit.Behaviors"            
+             xmlns:ex="clr-namespace:Xamarin.Forms.ToolKit.Extensions;assembly=Xamarin.Forms.ToolKit.Extensions"
+             x:Class="SQLite.Views.HomeView"
+             Title="{ex:Translate Key=HOME_TITLE}"
+             BindingContext="{Binding Home, Source={StaticResource Locator}}">
+
+    <ContentView ControlTemplate="{StaticResource MyAppTemplate}"
+                 BackgroundColor="White">
+
+        <StackLayout>
+
+            <ListView VerticalOptions="CenterAndExpand"
+                      HorizontalOptions="CenterAndExpand"
+                      ItemsSource="{Binding Path=TodoItems}"
+                      ItemTemplate="{StaticResource ToDoItemTemplate}">
+
+                <ListView.Behaviors>
+
+                    <b:EventToCommandBehavior EventName="ItemTapped"
+                                              CommandParameter="{Binding .}"
+                                              Command="{Binding SelectedItemCommand}"
+                                              EventArgsConverter="{StaticResource SelectedItemConverter}"/>
+
+                </ListView.Behaviors>
+
+            </ListView>
+
+            <Button Text="{ex:Translate Key=TXT_ADD}"                 
+                    Command="{Binding Path=AddCommand}"               
+                    Style="{StaticResource BtnGray}"/>
+
+        </StackLayout>
+
+    </ContentView>
+
+</ContentPage>
